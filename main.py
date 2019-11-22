@@ -42,12 +42,16 @@ form="""
 
 
 """
-@app.route("/encrypt")
+@app.route("/encrypt",methods=['POST'])
 def encrypt():
-    return form
+    text=request.form['message']
+    rot=request.form['rot']
+    rot=int(rot)
+    return rotate_string(text,rot)
 
-@app.route("/")
+
+@app.route("/",methods=['POST'])
 def index():
-    return form
+    return encrypt()
 
 app.run()
